@@ -1,5 +1,6 @@
 package com.kiethuynh.kotlinmvp.di.component
 
+import com.kiethuynh.kotlinmvp.data.DataManager
 import com.kiethuynh.kotlinmvp.di.module.AppModule
 import com.kiethuynh.kotlinmvp.di.scope.ApplicationScope
 import dagger.Component
@@ -11,5 +12,5 @@ import dagger.Component
 @ApplicationScope
 @Component(modules = arrayOf(AppModule::class))
 interface AppComponent {
-
+    fun provideDataManager(): DataManager
 }

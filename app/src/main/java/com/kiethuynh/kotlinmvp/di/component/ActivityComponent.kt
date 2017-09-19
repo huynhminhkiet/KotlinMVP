@@ -2,7 +2,7 @@ package com.kiethuynh.kotlinmvp.di.component
 
 import com.kiethuynh.kotlinmvp.di.module.ActivityModule
 import com.kiethuynh.kotlinmvp.di.scope.ActivityScope
-import com.kiethuynh.kotlinmvp.ui.MainActivity
+import com.kiethuynh.kotlinmvp.ui.main.MainActivity
 import dagger.Component
 
 /**

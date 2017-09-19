@@ -4,13 +4,13 @@ import android.app.Activity
 import android.content.Context
 import com.kiethuynh.kotlinmvp.di.qualifier.ActivityContext
 import com.kiethuynh.kotlinmvp.di.scope.ActivityScope
-import com.kiethuynh.kotlinmvp.ui.MainContract
-import com.kiethuynh.kotlinmvp.ui.MainPresenter
+import com.kiethuynh.kotlinmvp.ui.main.MainContract
+import com.kiethuynh.kotlinmvp.ui.main.MainPresenter
 import dagger.Module
 import dagger.Provides
 
 /**
- * Created by kiethuynh on 14/09/2017.
+ * Created by kiethuynh on 14/09/2017
  */
 @Module
 class ActivityModule(private val activity: Activity) {
