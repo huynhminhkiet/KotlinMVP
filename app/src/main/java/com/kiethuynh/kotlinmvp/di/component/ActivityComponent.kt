@@ -2,7 +2,7 @@ package com.kiethuynh.kotlinmvp.di.component
 
 import com.kiethuynh.kotlinmvp.di.module.ActivityModule
 import com.kiethuynh.kotlinmvp.di.scope.ActivityScope
-import com.kiethuynh.kotlinmvp.ui.main.MainActivity
+import com.kiethuynh.kotlinmvp.ui.login.LoginActivity
 import dagger.Component
 
 /**
@@ -11,5 +11,5 @@ import dagger.Component
 @ActivityScope
 @Component(modules = arrayOf(ActivityModule::class), dependencies = arrayOf(AppComponent::class))
 interface ActivityComponent {
-    fun inject(mainActivity: MainActivity)
+    fun inject(mainActivity: LoginActivity)
 }

@@ -1,7 +1,8 @@
-package com.kiethuynh.kotlinmvp.ui.main
+package com.kiethuynh.kotlinmvp.ui.login
 
 import android.util.Log
 import ch.smartlink.framework.mvpbase.BasePresenter
+import com.kiethuynh.kotlinmvp.common.ErrorHandler
 import com.kiethuynh.kotlinmvp.data.DataManager
 import com.kiethuynh.kotlinmvp.data.retrofit.response.User
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,9 +12,11 @@ import javax.inject.Inject
 /**
  * Created by kiethuynh on 19/09/2017
  */
-class MainPresenter @Inject constructor(val mDataManager: DataManager) : BasePresenter<MainContract.View, MainContract.State>(), MainContract.Presenter {
-    override fun onAttachView(state: MainContract.State?) {
-        login(User("kiethuynh", "123456"))
+class LoginPresenter @Inject constructor(private val mDataManager: DataManager) : BasePresenter<LoginContract.View, LoginContract.State>(), LoginContract.Presenter {
+
+
+    override fun onAttachView(state: LoginContract.State?) {
+
     }
 
     private fun login(user: User) {
@@ -24,12 +27,17 @@ class MainPresenter @Inject constructor(val mDataManager: DataManager) : BasePre
                 .subscribe(
                         { header ->
                             view?.loadingIndicator(false)
-                            Log.d("Token", header)
+                            mDataManager.getPreferencesHelper().setAccessToken(header)
+                            view?.goToProfileScreen()
                         },
                         { throwable ->
                             view?.loadingIndicator(false)
-                            throwable.printStackTrace()
+                            ErrorHandler.handleError(throwable, this)
                         })
+    }
+
+    override fun onLoginButtonClick(username: String, password: String) {
+        login(User(username, password))
     }
 
     override fun onDetachView() {

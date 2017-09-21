@@ -8,6 +8,7 @@ import com.kiethuynh.kotlinmvp.MyApplication
 import com.kiethuynh.kotlinmvp.di.component.ActivityComponent
 import com.kiethuynh.kotlinmvp.di.component.DaggerActivityComponent
 import com.kiethuynh.kotlinmvp.di.module.ActivityModule
+import com.kiethuynh.kotlinmvp.utils.toast
 
 /**
  * Created by khanhnguyen on 13/09/2017
@@ -19,7 +20,7 @@ open class BaseActivity<P : MVPPresenter<V, S>, V : BaseView, S : MVPPresenter.S
         get() = field
 
     override fun hideKeyboard() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun setLoadingIndicator(visible: Boolean) {
@@ -32,6 +33,18 @@ open class BaseActivity<P : MVPPresenter<V, S>, V : BaseView, S : MVPPresenter.S
                 .appComponent((application as MyApplication).getAppComponent())
                 .activityModule(ActivityModule(this))
                 .build()
+    }
+
+    override fun showTokenInvalidError() {
+        toast("Wrong username password!")
+    }
+
+    override fun showOtherError() {
+        toast("Error!")
+    }
+
+    override fun showNoInternetConnection() {
+        toast("No Internet Connection!")
     }
 
     override fun getPresenterView(): V? {

@@ -12,9 +12,12 @@ import com.kiethuynh.kotlinmvp.data.datasource.RemoteDataSource
 import com.kiethuynh.kotlinmvp.data.preferences.AppPreferencesHelper
 import com.kiethuynh.kotlinmvp.data.preferences.PreferencesHelper
 import com.kiethuynh.kotlinmvp.di.qualifier.ApplicationContext
+import com.kiethuynh.kotlinmvp.di.qualifier.BodyLoggingInterceptor
+import com.kiethuynh.kotlinmvp.di.qualifier.HeaderLoggingInterceptor
 import com.kiethuynh.kotlinmvp.di.scope.ApplicationScope
 import dagger.Module
 import dagger.Provides
+import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -52,18 +55,27 @@ class AppModule(private val application: Application) {
     }
 
     @Provides
-    fun provideHttpClient(logging: HttpLoggingInterceptor): OkHttpClient {
+    fun provideHttpClient(@HeaderLoggingInterceptor headerLogging: HttpLoggingInterceptor,
+                          @BodyLoggingInterceptor bodyLogging: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
                 .connectTimeout(30000, TimeUnit.MILLISECONDS)
                 .readTimeout(30000, TimeUnit.MILLISECONDS)
                 .writeTimeout(30000, TimeUnit.MILLISECONDS)
-                .addInterceptor(logging)
+                .addInterceptor(headerLogging)
+                .addInterceptor(bodyLogging)
                 .build()
     }
 
     @Provides
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+    @HeaderLoggingInterceptor
+    fun provideHeaderLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.HEADERS }
+    }
+
+    @Provides
+    @BodyLoggingInterceptor
+    fun provideBodyLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
     }
 
     @Provides

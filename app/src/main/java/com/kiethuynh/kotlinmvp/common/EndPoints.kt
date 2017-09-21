@@ -5,4 +5,5 @@ package com.kiethuynh.kotlinmvp.common
  */
 object EndPoints {
     const val LOGIN = "login"
+    const val GET_PROFILE = "user/profile"
 }

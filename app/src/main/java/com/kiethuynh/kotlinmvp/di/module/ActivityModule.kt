@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Context
 import com.kiethuynh.kotlinmvp.di.qualifier.ActivityContext
 import com.kiethuynh.kotlinmvp.di.scope.ActivityScope
-import com.kiethuynh.kotlinmvp.ui.main.MainContract
-import com.kiethuynh.kotlinmvp.ui.main.MainPresenter
+import com.kiethuynh.kotlinmvp.ui.login.LoginContract
+import com.kiethuynh.kotlinmvp.ui.login.LoginPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -26,5 +26,5 @@ class ActivityModule(private val activity: Activity) {
 
     @Provides
     @ActivityScope
-    fun provideMainPresenter(mainPresenter: MainPresenter): MainContract.Presenter = mainPresenter
+    fun provideMainPresenter(mainPresenter: LoginPresenter): LoginContract.Presenter = mainPresenter
 }

@@ -9,4 +9,7 @@ interface BaseView : MVPPresenter.View {
     fun hideKeyboard()
 
     fun setLoadingIndicator(visible : Boolean)
+    fun showTokenInvalidError()
+    fun showOtherError()
+    fun showNoInternetConnection()
 }
