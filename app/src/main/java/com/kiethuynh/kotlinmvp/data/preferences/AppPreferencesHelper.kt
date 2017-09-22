@@ -11,6 +11,7 @@ open class AppPreferencesHelper @Inject constructor(private val sharedPreference
     val PREFS_ACCESS_TOKEN = "ACCESS_TOKEN"
 
     override fun setAccessToken(accessToken: String?) {
+        sharedPreferences.edit().putString(PREFS_ACCESS_TOKEN, accessToken).apply()
     }
 
     override fun getAccessToken(): String? {

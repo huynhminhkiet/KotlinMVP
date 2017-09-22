@@ -33,4 +33,12 @@ abstract class BasePresenter<V : BaseView, S : MVPPresenter.State> : MVPPresente
     override fun onNoInternetConnection() {
         view?.showNoInternetConnection()
     }
+
+    override fun onForbiddenError() {
+
+    }
+
+    override fun onUnauthorizedError() {
+        view?.showUnauthorizedError()
+    }
 }

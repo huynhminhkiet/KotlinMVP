@@ -1,6 +1,7 @@
 package ch.smartlink.framework.mvpbase
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import ch.smartlink.framework.mvpbase.core.MVPAppCompatActivity
 import ch.smartlink.framework.mvpbase.core.MVPPresenter
@@ -8,7 +9,9 @@ import com.kiethuynh.kotlinmvp.MyApplication
 import com.kiethuynh.kotlinmvp.di.component.ActivityComponent
 import com.kiethuynh.kotlinmvp.di.component.DaggerActivityComponent
 import com.kiethuynh.kotlinmvp.di.module.ActivityModule
+import com.kiethuynh.kotlinmvp.ui.login.LoginActivity
 import com.kiethuynh.kotlinmvp.utils.toast
+
 
 /**
  * Created by khanhnguyen on 13/09/2017
@@ -35,8 +38,18 @@ open class BaseActivity<P : MVPPresenter<V, S>, V : BaseView, S : MVPPresenter.S
                 .build()
     }
 
+    override fun getPresenterView(): V? {
+        return this as V
+    }
+
     override fun showTokenInvalidError() {
-        toast("Wrong username password!")
+        navigateLoginScreen()
+    }
+
+    override fun navigateLoginScreen() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     override fun showOtherError() {
@@ -47,7 +60,7 @@ open class BaseActivity<P : MVPPresenter<V, S>, V : BaseView, S : MVPPresenter.S
         toast("No Internet Connection!")
     }
 
-    override fun getPresenterView(): V? {
-        return this as V
+    override fun showUnauthorizedError() {
+        toast("Wrong username password!")
     }
 }

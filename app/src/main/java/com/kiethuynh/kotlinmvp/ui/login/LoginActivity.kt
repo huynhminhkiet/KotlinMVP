@@ -32,6 +32,7 @@ class LoginActivity : BaseActivity<LoginContract.Presenter, LoginContract.View, 
     override fun goToProfileScreen() {
         val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun loadingIndicator(enable: Boolean) {

@@ -5,6 +5,8 @@ package com.kiethuynh.kotlinmvp.common
  */
 interface ErrorCallback {
     fun onTokenInvalidError()
+    fun onUnauthorizedError()
+    fun onForbiddenError()
     fun onNoInternetConnection()
     fun onOtherError()
 }

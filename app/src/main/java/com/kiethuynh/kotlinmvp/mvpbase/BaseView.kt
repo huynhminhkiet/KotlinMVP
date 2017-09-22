@@ -12,4 +12,6 @@ interface BaseView : MVPPresenter.View {
     fun showTokenInvalidError()
     fun showOtherError()
     fun showNoInternetConnection()
+    fun showUnauthorizedError()
+    fun navigateLoginScreen()
 }

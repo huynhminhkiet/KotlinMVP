@@ -1,10 +1,9 @@
 package com.kiethuynh.kotlinmvp.ui.login
 
-import android.util.Log
 import ch.smartlink.framework.mvpbase.BasePresenter
 import com.kiethuynh.kotlinmvp.common.ErrorHandler
 import com.kiethuynh.kotlinmvp.data.DataManager
-import com.kiethuynh.kotlinmvp.data.retrofit.response.User
+import com.kiethuynh.kotlinmvp.data.retrofit.request.UserRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -19,15 +18,15 @@ class LoginPresenter @Inject constructor(private val mDataManager: DataManager) 
 
     }
 
-    private fun login(user: User) {
+    private fun login(userRequest: UserRequest) {
         view?.loadingIndicator(true)
-        mDataManager.getDataSource().login(user)
+        mDataManager.getDataSource().login(userRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { header ->
+                        { token ->
                             view?.loadingIndicator(false)
-                            mDataManager.getPreferencesHelper().setAccessToken(header)
+                            mDataManager.getPreferencesHelper().setAccessToken(token)
                             view?.goToProfileScreen()
                         },
                         { throwable ->
@@ -37,7 +36,7 @@ class LoginPresenter @Inject constructor(private val mDataManager: DataManager) 
     }
 
     override fun onLoginButtonClick(username: String, password: String) {
-        login(User(username, password))
+        login(UserRequest(username, password))
     }
 
     override fun onDetachView() {
@@ -45,6 +44,4 @@ class LoginPresenter @Inject constructor(private val mDataManager: DataManager) 
 
     override fun onDestroy() {
     }
-
-
 }

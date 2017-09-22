@@ -17,6 +17,7 @@ import com.kiethuynh.kotlinmvp.di.qualifier.HeaderLoggingInterceptor
 import com.kiethuynh.kotlinmvp.di.scope.ApplicationScope
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
